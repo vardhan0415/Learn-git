@@ -1,0 +1,6 @@
+this is to test the git rebase
+procedure:
+We will be creating a file in the brach master and 
+we will checkout the hot-fix branch
+we will go git rebase in the hot-fix
+then will check how it is behaving...
