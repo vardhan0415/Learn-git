@@ -1,0 +1,406 @@
+this is to learn the git wotk flow
+This is not so much into the git as it requores only basics.
+##########################################################
+20230825
+GIT:
+---
+How to configure username :
+*******************************
+
+ubuntu@ip-172-31-39-81:~/projectk$ git config --global --list
+fatal: unable to read config file '/home/ubuntu/.gitconfig': No such file or directory
+ubuntu@ip-172-31-39-81:~/projectk$ git config --global user.name vardhan0415
+ubuntu@ip-172-31-39-81:~/projectk$ git config --global user.email "vardhangaliveeti@gmail.com"
+ubuntu@ip-172-31-39-81:~/projectk$ git config --global --list
+user.name=vardhan0415
+user.email=vardhangaliveeti@gmail.com
+----------------
+If we remove a file and add and committed and we want to revert the file then we need to 
+
+git checkout commitid_where the fileexists
+git revert commit_id_file+exists
+
+This will bring back the files to the working directory.
+
+git pop statsh
+===========================================================================
+When we get the issue in git push then 
+
+ubuntu@ip-172-31-39-81:~/projectk$ git push origin NANDHU0826
+To github.com:vardhan0415/Devops-Cource0415.git
+ ! [rejected]        NANDHU0826 -> NANDHU0826 (non-fast-forward)
+error: failed to push some refs to 'github.com:vardhan0415/Devops-Cource0415.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+
+ubuntu@ip-172-31-39-81:~/projectk$ git pull origin NANDHU0826
+From github.com:vardhan0415/Devops-Cource0415
+ * branch            NANDHU0826 -> FETCH_HEAD
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint:
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint:
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.
+ubuntu@ip-172-31-39-81:~/projectk$ git pull --rebase origin NANDHU0826
+From github.com:vardhan0415/Devops-Cource0415
+ * branch            NANDHU0826 -> FETCH_HEAD
+warning: skipped previously applied commit 1281922
+warning: skipped previously applied commit 3390d6d
+warning: skipped previously applied commit 75a59a2
+warning: skipped previously applied commit 0c485e3
+warning: skipped previously applied commit 420c87d
+hint: use --reapply-cherry-picks to include skipped commits
+hint: Disable this message with "git config advice.skippedCherryPicks false"
+Successfully rebased and updated refs/heads/NANDHU0826.
+
+
+Branching in GIT:
+-----------------
+
+When there is a parallel development and multiple developers do multiple commits it is quite a bit difficult to get the indivisual commit version from the github, this is where the branching cincept came into picutre.
+
+1. It is suggested to create a copy of the main branch and then commit the changes, then it will be easy for identfying the version and to release the code.
+2. Post confirmation of the patch is working, then it is mandatory to merge the code to the main branch code.
+
+git fetch [ if there are any changes in the Branch then it shows the changes ]
+
+In order to switch the branch
+
+git checkout branch_name [ create a new branch with code of the main ]
+
+git checkout defect 
+
+git remote -v
+
+git push origin defect [ pushing the changes done in the brach defect from local to the remote ]
+
+It is not recommended to merge the code from local to main branch
+
+IN Git HUb we have an option pull requests. [ we have to pull the request from defect branch to main add comments & you need to commit the merge ]
+
+How to remove the branch from the local
+
+git branch -d <branch_name>
+
+git branch -m <branch_name>   [ assuming you are in the branch which you trying to rename the branch ] 
+
+git branch -d defect
+
+Deletion of branch and restoring can be done over Git Hub.
+
+HOw to create a branch in the local?
+
+git branch branch_name
+
+git branch test
+
+git checkout -b branch_name
+
+git push origin test [ This will create a new branch in the github and then commit to the branch ]
+
+How do we merge the two brnaches in the local [ git merge ]
+
+Prerequisite: you must be on the main branch
+
+git merge branch_that_is_to_be_merged
+
+git merge test 
+
+Unfortunately we pushed the wrong code to the main branch is it possible to revert ? 
+
+Is it from local reverting to the correct version commit and again push to master ? -- YES
+
+We can allow other to commit the code to the prject -- collaborators in the settings 
+
+My kye is not set up so to setup:
+
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+ssh-keygen -t rsa -b 4096 -C "vardhangaliveeti@gmail.com"
+
+cat ~/.ssh/id_rsa.pub
+
+It prints below:
+----------------
+
+ubuntu@ip-172-31-40-1:~$ ssh-keygen -t rsa -b 4096 -C "vardhangaliveeti@gmail.com"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/ubuntu/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/ubuntu/.ssh/id_rsa
+Your public key has been saved in /home/ubuntu/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:UskpzFL8kLs5cMLdEyQLCjO3zyE4RNNXe9UpLvwSrcM vardhangaliveeti@gmail.com
+The key's randomart image is:
++---[RSA 4096]----+
+|=+o ..++.  .. .  |
+|.*.+ *++oo.. o   |
+|o +.+.=**oo .    |
+| . ++o+o=+ o     |
+|    o+.oS.=      |
+|      +. E .     |
+|       .  o      |
+|                 |
+|                 |
++----[SHA256]-----+
+
+Add the key in the github it asks password and now its added
+----------------------------------------------------
+
+git stash pop  [ It will be retrieve the last statshed file ]
+
+git statsh apply <index> [ This will get the specific files ]
+
+
+
+************
+STASH:		*
+*************
+It will remove the files from staging position that is saves in the cache [ it can be used when handling multiple branches ]
+git stash <filename>
+git stash --list    [ To show the stashed files in the git ]
+git stash show stash@{0}  [ To show the specific stashed files in the git ]
+git stash apply stash@{0}  [ To revert the stashed file ] 
+  
+GIT workflow: [ local ] 
+-------------
+*************************************************************
+github repo → clone → changes → add → commit → push	→ GitHub *
+*************************************************************
+
+Git Merge conflicts: 
+
+When git is unable to automatically resolve the difference in code then the merge conflicts arises.
+
+methods to resolve:
+
+1. Pull request > It is through GitHub once the code is pushed to the GitHub we can see the pull request option.
+2. git merge  > It is used to merge the code from one branch to the other Branch.
+
+undoing the changes:
+
+case1: staged
+staged [ those are added but not committed ]
+
+git reset <filename>
+
+case2: commit 
+
+git reset HEAD~1  [ it will reset to the latest 1 commit ]
+
+case3: multiple 
+
+git rest <commitid>
+
+git reset --hard <commitid>   [ This is very dangerous command as it clears the even staged files as well. in the git log you won't find it. { git revert is different to git reset} ] 
+
+FOrk: A rough copy of the respository [ we can fork A users project to Ours ]
+
+----- 
+gitignore: It is used to ignore that few formatted files from the working directory.
+
+works for the file that are created post configuration only 
+
+eg: 
+
+In summary, if you create a file after configuring .gitignore, it will be affected by the rules in the .gitignore. If a file already existed before the .gitignore rules were in place, it won't be affected by those rules
+
+
+---------------------------------------------
+GIT intermediate level from free code camp YT:
+
+1. git add -p index.html [ parts of the index.html will be staged ].
+2. git commit [ this will opena command editor where you can add the subject and leave a line and then write the description as why the change, what is major in it (ctrl o + enter + crtl x)]
+3. git push --setupstream origin master 
+
+4. git merge --abort
+5. git rebase --abort
+6. 
+ ----------------------------
+ git log --graph --pretty=oneline  [ shows the commit and then the message only 
+ 
+ git mergetool
+ left side is the initial merge
+ right is the latest merge
+ middle is the master initially before merge
+ bottom is the one having both the changes.
+--------------------------------------------------------------------------------------------------------------
+maven/gradle is used to complie the code developed by the developers.
+
+Where as jenkins/bamboo/azurepipeline/ is a tool used to automate the build code process.
+
+build code process = continuous integration process [ CI ]
+
+----------------------------------------------------------------------------------------------------------------
+Step by step guide to GIT:
+
+1. Need a Linux terminal for that I created a AWS account and created an INstance. [ we can use the windows version git and vs code as well]
+2. Down load the git using the below commands.
+
+Get the below data from the https://git-scm.com/download/linux
+
+For Ubuntu, this PPA provides the latest stable upstream Git version
+
+# add-apt-repository ppa:git-core/ppa # apt update; apt install git
+
+Create/Setup the GITHUB account 
+A). https://github.com/
+B). SignUp for the Git Hub Account.
+C). Navigate to the Home page/ got profile setting create a repository.
+
+3. create a directory 
+mkdir projectk
+4. execute the below command to initiate the git
+ git init
+5. Develop the project with reauired files.
+6. You have to add the file for git to track which is called staging.
+git add <Filenames>
+
+A). If all the files are to be added then 
+git add .
+7. TO check the status 
+git status
+8. TO commit the changes 
+git commit -m "message to understand the changes"
+
+A). We can commit by simply executing git commit [ then a vi file open the first line is the subject and enter ans write on the third line then it is body of the change].
+9. Now to add the changes to the git repository we need to execute the below
+
+git remote add origin https://github.com/username/repository.git
+
+10. TO check the configured remote 
+git remote -v
+11. Configure the git username as well. The purpose of setting your user name is to provide a clear indication of who made the changes in the commit history. It's especially important when collaborating with others on a project, as it helps identify the authorship of code changes.
+
+git config --global user.name "Your Name"
+git config --global user.email "Your email"
+git config --list
+
+12. Create a Branch
+git branch <branch_name>
+
+git checkout -b <branch_name>
+
+git branch [ TO check the brnaches ]
+
+13. To push the changes to the Repository [ When you are doing for the first time you need to configure the username and PAT key]
+git push origin master
+14. To pull the branch from the Repository to the local
+git pull origin master
+15. To switch from one branch to another Branch 
+git checkout <branch_name>
+
+git switch -
+
+16. To merge the development from one branch to the other branch
+git merge <another_branch> [ assuming You are in the branch to which changes needs to be merged ]
+17. TO get the files from one branch but shouldn't be committed.
+git merge --squash
+18. understanding merge & rebase:
+
+1. create f1.txt and f2.txt files in branch b1 
+2. create C1.txt and C2.txt files in branch master 
+3. Now if you want to merge b1 to master then 
+git merge b1 [ execute from master branch ]
+final view  in master
+c1 c2 f1 f2 
+-----
+1. create f1.txt and f2.txt files in branch b1 
+2. create C1.txt and C2.txt files in branch master
+3. Now if you want to get the files from branch b1 but shouldn't be committed then 
+
+git merge --squash b1 [ assuming you are in the Master ] 
+
+overview of master
+
+c1 c2 only 
+
+where as f1 f2 will be in staging position
+---------------The below is the lengthy process seems 
+1. create f1.txt and f2.txt files in branch b1 
+2. create C1.txt and C2.txt files in branch master
+git rebase master  [ execute from the branch b1 ] This will have the code of master in the b1 branch.
+
+C1 C2 f1 f2 
+
+git rebase b1 [ execute from the branch master ] This will have the code of b1 in the master  branch.
+
+this will have the code as   C1 C2 f1 f2  
+19. TO delete a brnach
+git checkout -D <Branch_Name>
+20. TO delte a branch in the Repository
+git push origin --delete <Branch_Name>
+
+21.git diff <branch name that is to compare >  [ assuming your are in the one branch and comapring the other]
+
+22.git branch -M <New branch name>  [ this is to rename the branch ]
+
+23. to delete the brnach in repository then 
+
+git push origin --delete <branch name>
+24. git log 
+
+25. git push origin <Branch_NAME> [ This is to push the new branch created in the local and to add in the Remote repo ].
+
+==================**************_++++++++++++++++++++=====================
+How to push the data from one branch/repository to the other branch.
+
+1. git clone <source_repository_url>
+
+2. cd <source_repository_directory>
+
+3. git remote add destination <destination_repository_url> 
+
+^[ Add the Destination Repository as a Remote: To push data to the Destination Repository, you need to add it as a remote in your Source Repository. You can use the git remote add command for this]
+
+4. git fetch destination [ Fetch the Latest Changes from the Destination Repository: This step fetches information about branches and commits from the remote repository (the Destination Repository). It doesn't directly involve branches in your local repository. ]
+
+5. git push destination <source_branch>:<destination_branch>
+
+6. eg: git push destination main:main
+
+
+practise:
+
+git clone git@github.com:vardhan0415/Devops-Cource0415.git
+
+cd Devops-Cource0415
+
+git remote add destination git@github.com:vardhan0415/CIMB.git
+
+git remote -v
+
+git remove rm origin [ It deletes the configuration that were set in the git remote add ] 
+------------------
+destination     git@github.com:vardhan0415/CIMB.git (fetch)
+destination     git@github.com:vardhan0415/CIMB.git (push)
+origin  git@github.com:vardhan0415/Devops-Cource0415.git (fetch)
+origin  git@github.com:vardhan0415/Devops-Cource0415.git (push)
+
+-----------
+
+git merge --allow-unrelated-histories destination/main  [ This command later it then allowed to push ] 
+
+The "refusing to merge unrelated histories" error occurs when Git detects that the branches you are trying to merge have unrelated commit histories. This can happen if the two branches have diverged significantly or if they were created independently without a common ancestor.
+
+To resolve this error and perform the merge despite unrelated histories, you can use the --allow-unrelated-histories flag with the git merge command. Here's how to do it.
+
+6. eg: git push destination master:main
+
+git reset --hard <commitid>
+
+>>> This is dangerous and it will delete the commitid
+git reset --soft <commit_id>
+>>> This also deletes the commit id but the files are in staging area.
+
