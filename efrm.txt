@@ -4,3 +4,4 @@ We will be creating a file in the brach master and
 we will checkout the hot-fix branch
 we will go git rebase in the hot-fix
 then will check how it is behaving...
+This comment is to test the updation of the data in the hot-fix is updating the master branch after using the git rebase from hot-fix
